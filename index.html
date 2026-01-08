@@ -384,13 +384,13 @@
         .floral-top-left {
             top: -8px;
             left: -8px;
-            background-image: url('./assets/golden-leaf.png');
+            background-image: url('./assets/petal.png');
         }
 
         .floral-bottom-right {
             bottom: -8px;
             right: -8px;
-            background-image: url('./assets/golden-leaf.png');
+            background-image: url('./assets/petal.png');
             transform: rotate(180deg);
         }
 
@@ -704,17 +704,24 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                min-width: 90%;
+                
             }
 
             .countdown-box {
                 flex: 0 0 auto;
-                width: 85px;
-                height: 90px;
+                width: 20%;
+                height: 5%;
                 margin: 0 2px;
+                
             }
 
             .countdown-value {
-                font-size: 1.8rem;
+                font-size: 1rem;
+            }
+
+            .countdown-label {
+                font-size: 0.5rem;
             }
 
             .events-container {
