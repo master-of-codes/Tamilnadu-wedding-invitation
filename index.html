@@ -4,12 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tamil Nadu Wedding Invitation | Kavya & Aravind</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- iOS Icons -->
+    <link rel="apple-touch-icon" href="assets/logo.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Tamilnadu Wedding">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#0a0a0a">
+    
+    <!-- Icons for PWA -->
+    <link rel="icon" href="assets/logo.png" type="image/png">
+    
+    <!-- External Dependencies -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Playfair+Display:wght@400;500;700&family=Cinzel:wght@400;700&family=Alex+Brush&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    
     <style>
         * {
             margin: 0;
@@ -27,6 +45,97 @@
             color: #fff;
             overflow-x: hidden;
             touch-action: pan-y;
+        }
+
+        /* PWA Install Dialog */
+        .pwa-dialog {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .pwa-dialog-content {
+            background: linear-gradient(135deg, rgba(20, 20, 20, 0.95), rgba(40, 40, 40, 0.95));
+            border: 2px solid #ffd700;
+            border-radius: 15px;
+            padding: 30px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.3);
+            animation: dialogAppear 0.5s ease-out;
+        }
+
+        @keyframes dialogAppear {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .pwa-dialog h3 {
+            font-family: 'Cinzel', serif;
+            color: #ffd700;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+
+        .pwa-dialog p {
+            margin-bottom: 25px;
+            line-height: 1.6;
+            color: #fff;
+        }
+
+        .pwa-dialog-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .pwa-dialog-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            min-width: 100px;
+        }
+
+        .install-btn {
+            background-color: #ffd700;
+            color: #000;
+        }
+
+        .install-btn:hover {
+            background-color: #ffed4e;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
+        }
+
+        .cancel-btn {
+            background-color: transparent;
+            color: #ffd700;
+            border: 2px solid #ffd700;
+        }
+
+        .cancel-btn:hover {
+            background-color: rgba(255, 215, 0, 0.1);
+            transform: translateY(-3px);
         }
 
         /* Main container with background image */
@@ -187,11 +296,8 @@
             padding-top: 60px;
         }
 
-
-
         .route-section {
             min-height: 60vh;
-            
         }
 
         .message-section {
@@ -208,7 +314,6 @@
         .footer-section {
             min-height: 40vh;
             padding: 15px 20px;
-            
         }
 
         /* Typography */
@@ -327,7 +432,6 @@
             margin-bottom: 15px;
             border-radius: 5px;
             overflow: visible;
-            /* box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); */
             z-index: 1;
         }
 
@@ -361,7 +465,6 @@
 
         .event-1 .event-image {
             background-image: url('./assets/event1.jpg');
-
         }
 
         .event-2 .event-image {
@@ -407,7 +510,6 @@
         .route-btn {
             display: inline-flex;
             align-items: center;
-            /* background-color: rgba(255, 215, 0, 0.2); */
             border: 2px solid #ffd700;
             color: #ffd700;
             padding: 12px 25px;
@@ -614,6 +716,20 @@
             text-align: center;
         }
 
+        /* Install logo in footer */
+        .install-logo {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 50%;
+            border: 2px solid transparent;
+        }
+
+        .install-logo:hover {
+            transform: scale(1.1);
+            border-color: #ffd700;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+        }
+
         /* Responsive design */
         @media (min-width: 768px) {
             section {
@@ -686,7 +802,6 @@
         }
 
         @media (max-width: 767px) {
-
             .content-overlay {
                 background-color: rgba(0, 0, 0, 0.4);
                 width: 100%;
@@ -705,7 +820,6 @@
                 align-items: center;
                 justify-content: center;
                 min-width: 90%;
-                
             }
 
             .countdown-box {
@@ -713,7 +827,6 @@
                 width: 20%;
                 height: 5%;
                 margin: 0 2px;
-                
             }
 
             .countdown-value {
@@ -759,7 +872,6 @@
                 margin-bottom: 15px;
                 border-radius: 5px;
                 overflow: visible;
-                /* box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); */
                 z-index: 1;
             }
 
@@ -776,8 +888,6 @@
                 z-index: 3;
                 pointer-events: none;
             }
-
-
 
             .event-image {
                 width: 65%;
@@ -800,14 +910,12 @@
                 background-image: url('./assets/img2.jpg');
             }
 
-
             .events-section {
                 background-image: url('./assets/img3.jpg');
             }
 
             .route-section {
                 background-image: url('./assets/img4.png');
-
             }
 
             .message-section {
@@ -829,7 +937,6 @@
 
         /* Mobile background images */
         @media (max-width: 767px) {
-
             .content-overlay {
                 background-color: rgba(0, 0, 0, 0.4);
                 width: 100%;
@@ -875,7 +982,7 @@
             }
 
             .hanging-images {
-                height: 32vh; /* Reduced height for mobile */
+                height: 32vh;
             }
 
             .hanging-image-large {
@@ -892,15 +999,12 @@
                 transition: transform 3s ease-in-out;
             }
 
-
             .hanging-image-small {
                 max-width: 10%;
                 max-height: 16vh;
                 transform: translateY(-150vh);
                 transition: transform 3s ease-in-out;
             }
-
-
         }
 
         /* Hide scrollbar for countdown on mobile */
@@ -914,10 +1018,8 @@
         }
 
         /* Hanging Images */
-
-
         .hanging-images {
-            height: 32vh; /* Reduced height for mobile */
+            height: 32vh;
         }
 
         .hanging-image-large {
@@ -934,37 +1036,35 @@
             transition: transform 3s ease-in-out;
         }
 
-
         .hanging-image-small {
             max-width: 10%;
             max-height: 16vh;
             transform: translateY(-150vh);
             transition: transform 3s ease-in-out;
         }
-        
 
         .hanging-images {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 8vh; /* Flexible height */
+            height: 8vh;
             display: flex;
             justify-content: space-around;
             align-items: flex-start;
             pointer-events: none;
             z-index: 1001;
             opacity: 1;
-            gap: 1vw; /* Equal gaps */
+            gap: 1vw;
         }
 
         .hanging-image {
-            width: 6vw; /* Flexible width */
-            height: 16vw; /* Flexible height, square aspect ratio */
+            width: 6vw;
+            height: 16vw;
             position: relative;
             top: 0;
-            object-fit: cover; /* Maintain aspect ratio */
-            transform: translateY(-150vh); /* Start completely off-screen above for complete overflow effect */
+            object-fit: cover;
+            transform: translateY(-150vh);
             transition: transform 3s ease-in-out;
         }
 
@@ -974,7 +1074,7 @@
             bottom: 7px;
             left: 7px;
             right: 7px;
-            height: 20%; /* Adjust based on lamp image size */
+            height: 20%;
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
@@ -983,22 +1083,35 @@
         }
 
         .lamp {
-            width: 80px; /* Adjust based on lamp image size */
-            height: 100%; /* Adjust based on lamp image size */
+            width: 80px;
+            height: 100%;
             object-fit: contain;
             transition: transform 2s ease-in-out;
         }
 
         .lamp-left {
-            transform: translateX(-100vw); /* Start off-screen left */
+            transform: translateX(-100vw);
         }
 
         .lamp-right {
-            transform: translateX(100vw); /* Start off-screen right */
+            transform: translateX(100vw);
         }
     </style>
 </head>
 <body>
+    <!-- PWA Install Dialog -->
+    <div class="pwa-dialog" id="pwaDialog">
+        <div class="pwa-dialog-content">
+            <h3>Install Wedding App</h3>
+            <p>Do you want to install the <strong>Tamilnadu Wedding</strong> app on your device?</p>
+            <p>This will allow you to access the wedding invitation offline and get a better experience.</p>
+            <div class="pwa-dialog-buttons">
+                <button class="pwa-dialog-btn install-btn" id="installButton">Install</button>
+                <button class="pwa-dialog-btn cancel-btn" id="cancelButton">Cancel</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Audio player -->
     <div class="audio-container">
         <audio id="weddingSong" preload="metadata">
@@ -1062,8 +1175,6 @@
                         <div class="frame-container">
                             <div class="frame"></div>
                             <div class="event-image"></div>
-                            <!-- <div class="floral-overlay floral-top-left"></div>
-                            <div class="floral-overlay floral-bottom-right"></div> -->
                         </div>
                         <div class="event-details">
                             <h3>Mehndi Ceremony</h3>
@@ -1078,8 +1189,6 @@
                         <div class="frame-container">
                             <div class="frame"></div>
                             <div class="event-image"></div>
-                            <!-- <div class="floral-overlay floral-top-left"></div>
-                            <div class="floral-overlay floral-bottom-right"></div> -->
                         </div>
                         <div class="event-details">
                             <h3>Sangeet Night</h3>
@@ -1094,8 +1203,6 @@
                         <div class="frame-container">
                             <div class="frame"></div>
                             <div class="event-image"></div>
-                            <!-- <div class="floral-overlay floral-top-left"></div>
-                            <div class="floral-overlay floral-bottom-right"></div> -->
                         </div>
                         <div class="event-details">
                             <h3>Wedding Ceremony</h3>
@@ -1112,7 +1219,6 @@
                 <h2 data-aos="fade-down">Celebration Venue</h2>
                 <p data-aos="fade-up" data-aos-delay="200">Join us at the Grand Palace Hotel in Udaipur for our special day</p>
                 <a href="https://goo.gl/maps/example" target="_blank" data-aos="zoom-in" data-aos-delay="400">
-                    
                     <img src="./assets/map-icon.png" alt="map-icon" style="height: 30%; width: 30%;">
                 </a>
                 <p data-aos="fade-up" data-aos-delay="200">See the route on Google Maps</p>
@@ -1196,13 +1302,222 @@
                     <div class="copyright" data-aos="fade-down" data-aos-delay="400" style="display: flex; align-items: center; flex-direction: column;">
                         <p data-aos="fade-down" data-aos-delay="400">© 2023 Priya & Arjun Wedding Celebration. All rights reserved.</p>
                         <p>Designed with love for our special day</p>
-                        <p class="footer-text" style="font-size: 1rem; margin-top: 30px; display: flex; align-items: center; flex-direction: row; justify-content: center;"><img src="./assets/logo.png" style="border-radius: 50%; height: 10%; width: 10%; display: inline; margin: auto 15px;"/> Developed By Brahma Web Invitations.</p>
+                        <p class="footer-text" style="font-size: 1rem; margin-top: 30px; display: flex; align-items: center; flex-direction: row; justify-content: center;">
+                            <img src="./assets/logo.png" style="border-radius: 50%; height: 10%; width: 10%; display: inline; margin: auto 15px;" class="install-logo" id="installLogo" title="Double-click to install app"/>
+                            Developed By Brahma Web Invitations.
+                        </p>
                     </div>
                 </div>
             </section>
         </div>
     </div>
 
+    <!-- Inline Service Worker Registration and PWA Code -->
+    <script>
+        // Manifest content (created inline since we can't create separate files)
+        const manifest = {
+            "name": "Tamilnadu Wedding",
+            "short_name": "TamilWedding",
+            "description": "Tamil Nadu Wedding Invitation for Kavya & Aravind",
+            "start_url": "./",
+            "display": "standalone",
+            "background_color": "#0a0a0a",
+            "theme_color": "#0a0a0a",
+            "orientation": "portrait",
+            "icons": [
+                {
+                    "src": "./assets/logo.png",
+                    "sizes": "192x192",
+                    "type": "image/png",
+                    "purpose": "any maskable"
+                },
+                {
+                    "src": "./assets/logo.png",
+                    "sizes": "512x512",
+                    "type": "image/png",
+                    "purpose": "any maskable"
+                }
+            ],
+            "categories": ["lifestyle", "events"],
+            "prefer_related_applications": false
+        };
+
+        // Create manifest dynamically
+        function createManifest() {
+            const manifestElement = document.querySelector('link[rel="manifest"]');
+            if (manifestElement) {
+                const blob = new Blob([JSON.stringify(manifest, null, 2)], {type: 'application/json'});
+                const url = URL.createObjectURL(blob);
+                manifestElement.href = url;
+            }
+        }
+
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                const swUrl = './sw.js';
+                
+                // Create service worker inline
+                const swContent = `
+                    const CACHE_NAME = 'tamil-wedding-v1';
+                    const urlsToCache = [
+                        './',
+                        './index.html',
+                        './assets/logo.png',
+                        './assets/img1.jpg',
+                        './assets/img2.jpg',
+                        './assets/img3.jpg',
+                        './assets/img4.png',
+                        './assets/img5.jpg',
+                        './assets/event1.jpg',
+                        './assets/event2.jpg',
+                        './assets/event3.jpg',
+                        './assets/event-frame.png',
+                        './assets/frame.png',
+                        './assets/golden leaf.png',
+                        './assets/hanging-dia.png',
+                        './assets/lamp.png',
+                        './assets/map-icon.png',
+                        './assets/petal.png',
+                        './assets/pure-love-304010.mp3',
+                        'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
+                        'https://unpkg.com/aos@2.3.1/dist/aos.css',
+                        'https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Playfair+Display:wght@400;500;700&family=Cinzel:wght@400;700&family=Alex+Brush&family=Montserrat:wght@300;400;500&display=swap',
+                        'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css',
+                        'https://unpkg.com/aos@2.3.1/dist/aos.js'
+                    ];
+
+                    self.addEventListener('install', event => {
+                        event.waitUntil(
+                            caches.open(CACHE_NAME)
+                                .then(cache => {
+                                    return cache.addAll(urlsToCache);
+                                })
+                        );
+                    });
+
+                    self.addEventListener('fetch', event => {
+                        event.respondWith(
+                            caches.match(event.request)
+                                .then(response => {
+                                    if (response) {
+                                        return response;
+                                    }
+                                    return fetch(event.request);
+                                })
+                        );
+                    });
+
+                    self.addEventListener('activate', event => {
+                        const cacheWhitelist = [CACHE_NAME];
+                        event.waitUntil(
+                            caches.keys().then(cacheNames => {
+                                return Promise.all(
+                                    cacheNames.map(cacheName => {
+                                        if (cacheWhitelist.indexOf(cacheName) === -1) {
+                                            return caches.delete(cacheName);
+                                        }
+                                    })
+                                );
+                            })
+                        );
+                    });
+                `;
+
+                // Create service worker blob and register it
+                const blob = new Blob([swContent], {type: 'application/javascript'});
+                const swBlobUrl = URL.createObjectURL(blob);
+
+                navigator.serviceWorker.register(swBlobUrl)
+                    .then(registration => {
+                        console.log('Service Worker registered with scope:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.log('Service Worker registration failed:', error);
+                    });
+            });
+        }
+
+        // PWA Installation Logic
+        let deferredPrompt;
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+        });
+
+        // Install dialog functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            createManifest();
+            
+            const pwaDialog = document.getElementById('pwaDialog');
+            const installButton = document.getElementById('installButton');
+            const cancelButton = document.getElementById('cancelButton');
+            const installLogo = document.getElementById('installLogo');
+            let clickCount = 0;
+            let clickTimer;
+
+            // Double click on logo to show install dialog
+            installLogo.addEventListener('click', function() {
+                clickCount++;
+                
+                if (clickCount === 1) {
+                    clickTimer = setTimeout(() => {
+                        clickCount = 0;
+                    }, 300);
+                } else if (clickCount === 2) {
+                    clearTimeout(clickTimer);
+                    showInstallDialog();
+                    clickCount = 0;
+                }
+            });
+
+            // Show install dialog
+            function showInstallDialog() {
+                pwaDialog.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+
+            // Hide install dialog
+            function hideInstallDialog() {
+                pwaDialog.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+
+            // Install button click
+            installButton.addEventListener('click', async () => {
+                hideInstallDialog();
+                
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    const { outcome } = await deferredPrompt.userChoice;
+                    
+                    if (outcome === 'accepted') {
+                        console.log('User accepted the install prompt');
+                        
+                        // Show success message
+                        alert('Tamilnadu Wedding app is being installed on your device!');
+                    }
+                    deferredPrompt = null;
+                } else {
+                    // Fallback for browsers that don't support beforeinstallprompt
+                    alert('To install this app, look for the "Add to Home Screen" option in your browser menu.');
+                }
+            });
+
+            // Cancel button click
+            cancelButton.addEventListener('click', hideInstallDialog);
+
+            // Close dialog when clicking outside
+            pwaDialog.addEventListener('click', (e) => {
+                if (e.target === pwaDialog) {
+                    hideInstallDialog();
+                }
+            });
+        });
+    </script>
+
+    <!-- Original JavaScript for animations and functionality -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         // Initialize AOS (Animate on Scroll)
@@ -1262,13 +1577,12 @@
                     audioIcon.innerHTML = '<i class="bi bi-disc"></i>';
                     audioIcon.style.animation = 'pulse 2s infinite';
                 } else {
-                    audio.load(); // Ensure audio is loaded
+                    audio.load();
                     audio.play().then(() => {
                         audioIcon.innerHTML = '<i class="bi bi-pause-fill"></i>';
                         audioIcon.style.animation = 'none';
                     }).catch(e => {
                         console.log("Audio play failed:", e);
-                        // Reset to play icon if failed
                         audioIcon.innerHTML = '<i class="bi bi-play-fill"></i>';
                     });
                 }
@@ -1300,12 +1614,12 @@
                 petal.className = 'petal';
                 
                 // Random properties for each petal
-                const size = Math.random() * 20 + 15; // 15px to 35px
-                const startX = Math.random() * 100; // 0% to 100%
-                const rotation = Math.random() * 360; // 0 to 360 degrees
-                const duration = Math.random() * 10 + 15; // 15 to 25 seconds
-                const delay = Math.random() * 5; // 0 to 5 seconds delay
-                const opacity = Math.random() * 0.5 + 0.3; // 0.3 to 0.8
+                const size = Math.random() * 20 + 15;
+                const startX = Math.random() * 100;
+                const rotation = Math.random() * 360;
+                const duration = Math.random() * 10 + 15;
+                const delay = Math.random() * 5;
+                const opacity = Math.random() * 0.5 + 0.3;
                 
                 // Set petal styles
                 petal.style.width = `${size}px`;
@@ -1343,11 +1657,7 @@
             const lanternCount = 15;
             
             // Lantern image URLs
-            const lanternImages = [
-                // 'https://images.unsplash.com/photo-1543716091-a840c05249ec?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-                // 'https://images.unsplash.com/photo-1507800641140-bc8c5b91ae31?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-                // 'https://images.unsplash.com/photo-1528164344705-47542687000d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80'
-            ];
+            const lanternImages = [];
             
             // Create lanterns
             for (let i = 0; i < lanternCount; i++) {
@@ -1355,20 +1665,19 @@
                 lantern.className = 'lantern';
                 
                 // Random properties for each lantern
-                const size = Math.random() * 80 + 40; // 40px to 120px
-                const startX = Math.random() * 100; // 0% to 100%
-                const endX = Math.random() * 80 + 10; // 10% to 90%
-                const rotation = Math.random() * 360; // 0 to 360 degrees
-                const opacity = Math.random() * 0.7 + 0.3; // 0.3 to 1
-                const duration = Math.random() * 3 + 4; // 4 to 7 seconds
-                const delay = Math.random() * 2; // 0 to 2 seconds delay
-                const parallaxSpeed = Math.random() * 0.5 + 0.1; // 0.1 to 0.6
+                const size = Math.random() * 80 + 40;
+                const startX = Math.random() * 100;
+                const endX = Math.random() * 80 + 10;
+                const rotation = Math.random() * 360;
+                const opacity = Math.random() * 0.7 + 0.3;
+                const duration = Math.random() * 3 + 4;
+                const delay = Math.random() * 2;
+                const parallaxSpeed = Math.random() * 0.5 + 0.1;
                 
                 // Set lantern styles
                 lantern.style.width = `${size}px`;
                 lantern.style.height = `${size}px`;
                 lantern.style.left = `${startX}%`;
-                lantern.style.backgroundImage = `url('${lanternImages[Math.floor(Math.random() * lanternImages.length)]}')`;
                 lantern.style.transform = `rotate(${rotation}deg)`;
                 lantern.style.opacity = opacity;
                 
@@ -1381,7 +1690,7 @@
                 setTimeout(() => {
                     lantern.style.transition = `all ${duration}s ease-in-out`;
                     lantern.style.left = `${endX}%`;
-                    lantern.style.top = `${Math.random() * 70 + 10}%`; // 10% to 80% from top
+                    lantern.style.top = `${Math.random() * 70 + 10}%`;
                     lantern.style.opacity = opacity;
                     
                     // Add gentle floating animation
@@ -1571,7 +1880,7 @@
                             top: targetElement.offsetTop,
                             behavior: 'smooth'
                         });
-                    }
+                    }   
                 });
             });
         });
