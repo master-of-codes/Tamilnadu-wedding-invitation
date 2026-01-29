@@ -730,6 +730,17 @@
             box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
         }
 
+        /* Footer text styling for better mobile layout */
+        .footer-text {
+            font-size: 1rem;
+            margin-top: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
         /* Responsive design */
         @media (min-width: 768px) {
             section {
@@ -901,6 +912,29 @@
                 background-repeat: no-repeat;
                 border-radius: 40%;
                 z-index: 2;
+            }
+
+            /* Fix for footer text layout on mobile */
+            .footer-text {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                flex-wrap: nowrap;
+            }
+
+            .footer-text img {
+                border-radius: 50%;
+                height: 30px;
+                width: 30px;
+                margin: 0 10px;
+                display: inline-block;
+            }
+
+            .footer-text span {
+                display: inline;
+                font-size: 0.9rem;
+                white-space: nowrap;
             }
         }
 
@@ -1302,10 +1336,10 @@
                     <div class="copyright" data-aos="fade-down" data-aos-delay="400" style="display: flex; align-items: center; flex-direction: column;">
                         <p data-aos="fade-down" data-aos-delay="400">© 2023 Priya & Arjun Wedding Celebration. All rights reserved.</p>
                         <p>Designed with love for our special day</p>
-                        <p class="footer-text" style="font-size: 1rem; margin-top: 30px; display: flex; align-items: center; flex-direction: row; justify-content: center;">
-                            <img src="https://res.cloudinary.com/dkla3wpga/image/upload/v1769528682/logo_silzy5.png" style="border-radius: 50%; height: 10%; width: 10%; display: inline; margin: auto 15px;" class="install-logo" id="installLogo" title="Double-click to install app"/>
-                            Developed By Brahma Web Invitations.
-                        </p>
+                        <div class="footer-text">
+                            <img src="https://res.cloudinary.com/dkla3wpga/image/upload/v1769528682/logo_silzy5.png" style="border-radius: 50%; height: 30px; width: 30px; display: inline; margin: auto 10px;" class="install-logo" id="installLogo" title="Double-click to install app"/>
+                            <span>Developed By Brahma Web Invitations.</span>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -1570,6 +1604,70 @@
                 lampRight.style.transform = 'translateX(0)';
             }, 2800);
             
+            // AUTOPLAY AUDIO ON PAGE LOAD
+            // Attempt to autoplay audio immediately on page load
+            function autoplayAudio() {
+                if (audio) {
+                    audio.volume = 0.5;
+                    audio.loop = true;
+                    
+                    // Try to play audio
+                    const playPromise = audio.play();
+                    
+                    if (playPromise !== undefined) {
+                        playPromise.then(() => {
+                            // Successfully started playing
+                            console.log('Audio autoplay successful');
+                            isPlaying = true;
+                            audioIcon.innerHTML = '<i class="bi bi-pause-fill"></i>';
+                            audioIcon.style.animation = 'none';
+                            
+                            // Loop audio 50 times
+                            let playCount = 0;
+                            audio.addEventListener('ended', function() {
+                                playCount++;
+                                if (playCount < 50) {
+                                    audio.currentTime = 0;
+                                    audio.play();
+                                } else {
+                                    audioIcon.style.display = 'none';
+                                }
+                            });
+                        }).catch(error => {
+                            // Autoplay was prevented
+                            console.log('Autoplay prevented:', error);
+                            
+                            // Show audio icon with play button
+                            audioIcon.innerHTML = '<i class="bi bi-play-fill"></i>';
+                            audioIcon.style.animation = 'pulse 2s infinite';
+                            
+                            // Fallback: Try to play on first user interaction
+                            const playOnInteraction = () => {
+                                audio.play().then(() => {
+                                    console.log('Audio started on user interaction');
+                                    isPlaying = true;
+                                    audioIcon.innerHTML = '<i class="bi bi-pause-fill"></i>';
+                                    audioIcon.style.animation = 'none';
+                                    
+                                    // Remove event listeners after successful play
+                                    document.removeEventListener('click', playOnInteraction);
+                                    document.removeEventListener('touchstart', playOnInteraction);
+                                }).catch(e => {
+                                    console.log('Failed to play even on interaction:', e);
+                                });
+                            };
+                            
+                            // Add event listeners for user interaction
+                            document.addEventListener('click', playOnInteraction, { once: true });
+                            document.addEventListener('touchstart', playOnInteraction, { once: true });
+                        });
+                    }
+                }
+            }
+            
+            // Try to autoplay when DOM is ready
+            autoplayAudio();
+            
             // Toggle audio play/pause on icon click
             audioIcon.addEventListener('click', function() {
                 if (isPlaying) {
@@ -1577,7 +1675,6 @@
                     audioIcon.innerHTML = '<i class="bi bi-disc"></i>';
                     audioIcon.style.animation = 'pulse 2s infinite';
                 } else {
-                    audio.load();
                     audio.play().then(() => {
                         audioIcon.innerHTML = '<i class="bi bi-pause-fill"></i>';
                         audioIcon.style.animation = 'none';
@@ -1587,18 +1684,6 @@
                     });
                 }
                 isPlaying = !isPlaying;
-            });
-            
-            // Loop audio 50 times
-            let playCount = 0;
-            audio.addEventListener('ended', function() {
-                playCount++;
-                if (playCount < 50) {
-                    audio.currentTime = 0;
-                    audio.play();
-                } else {
-                    audioIcon.style.display = 'none';
-                }
             });
 
             // Flower petals animation
